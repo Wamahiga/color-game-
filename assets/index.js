@@ -54,14 +54,13 @@ function addGlobalEventListener(type, selector, callback) {
 
 function checkColors(e) {
   if (rgbEl == e.target.style.backgroundColor) {
-    // colorsEl.children.style.backgroundColor = e;
-    // statusEl.innerHTML ="You Win!"
-    // setTimeout(() => {
-    //   resetGame();
-    // }, 1000);
+    statusEl.innerHTML ="You Win!"
+    setTimeout(() => {
+      resetGame();
+    }, 1000);
     console.log("You win!")
   } else {
-    console.log("You Lose!")
+    // colorsBlocks.style.backgroundColor = e.target.style.backgroundColor;
     e.target.style.display = "none";
   }
 }

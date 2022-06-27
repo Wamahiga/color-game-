@@ -12,7 +12,7 @@ resetGame(); // Reset the game
  * Add event listener for setting number of color blocks displayed
  */
 
-addGlobalEventListener("click", '.diff__btn', (e) => {
+addGlobalEventListener("click", ".diff__btn", (e) => {
   setNumberOfTiles(e.target.innerHTML);
 });
 
@@ -20,15 +20,15 @@ addGlobalEventListener("click", '.diff__btn', (e) => {
  * Add event listener for selected color
  */
 
-addGlobalEventListener("click", '.colors__block', (e) => {
+addGlobalEventListener("click", ".colors__block", (e) => {
   checkColors(e);
 });
 
 /**
  * Generate a global event listener for every clicked action
- * @param {*} type 
- * @param {*} selector 
- * @param {*} callback 
+ * @param {*} type
+ * @param {*} selector
+ * @param {*} callback
  */
 
 function addGlobalEventListener(type, selector, callback) {
@@ -40,27 +40,33 @@ function addGlobalEventListener(type, selector, callback) {
 /**
  * Function to check colors selected?
  * An event will trigger this action to be fired
- * 
+ *
  * Choose a tile matching the RGB color - if you choose the right tile you win
  * If the player wins:
- * - All the tiles change their color to the RGB. 
+ * - All the tiles change their color to the RGB.
  * - A text is displayed saying they have won and a new game will start.
  * - A new game starts after a second with a different RGB and tiles.
- * 
+ *
  * If the player clicks on the wrong tile:
  * - The tile disappears and they get a chance to click on the remaining tiles.
  * @param {e}
  */
 
 function checkColors(e) {
-  if (rgbEl == e.target.style.backgroundColor) {
-    statusEl.innerHTML ="You Win!"
+  if (rgbEl.innerText.toLowerCase() == e.target.style.backgroundColor) {
+    statusEl.innerHTML = "You Win!";
+
+    // cycle through the colorsBlocks and assign each a backgroundColor of selected color
+    for (let i = 0; i < colorsBlocks.length; i++) {
+      colorsBlocks[i].style.backgroundColor = e.target.style.backgroundColor;
+    }
+
     setTimeout(() => {
       resetGame();
-    }, 1000);
-    console.log("You win!")
+    }, 5000);
+
+    console.log("You win!");
   } else {
-    // colorsBlocks.style.backgroundColor = e.target.style.backgroundColor;
     e.target.style.display = "none";
   }
 }
@@ -73,8 +79,7 @@ function resetGame() {
   pickedColor = random(diffEl);
   rgbEl.innerHTML = colors[pickedColor];
   setColors();
-  statusEl.innerHTML =
-    "Try to guess the right color based on the RGB value by clicking on the blocks.";
+  statusEl.innerHTML = "Try to guess the right color based on the RGB value by clicking on the blocks.";
 }
 
 function setColors() {
@@ -91,7 +96,7 @@ function pickColors() {
 
 /**
  * Generate random rgb color
- * @returns 
+ * @returns
  */
 
 function randomColor() {
@@ -100,8 +105,8 @@ function randomColor() {
 
 /**
  * Generates random number with limited characters
- * @param {*} r 
- * @returns 
+ * @param {*} r
+ * @returns
  */
 
 function random(r) {

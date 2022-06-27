@@ -1,10 +1,12 @@
 // Initial color block configuration
+let diffEls = document.querySelector(".diff__btn");
 let diffEl = document.querySelector(".diff__btn.active").innerHTML; // Get value of button
 let colorsEl = document.querySelector(".colors"); // Get the colors parent element
 let colorsBlocks; // Set variable for individual color blocks
 let rgbEl = document.querySelector(".rgb"); // Get the rgb element - generated rgb color is displayed here
 let statusEl = document.querySelector(".status"); // Get the status element - display the game status here
-let colors = []; // Generated colors will be stored in an array
+let colors = []; // Generated colors will be stored in a colors array
+
 createBlocks(diffEl); // function call to create color blocks
 resetGame(); // Reset the game
 
@@ -13,6 +15,9 @@ resetGame(); // Reset the game
  */
 
 addGlobalEventListener("click", ".diff__btn", (e) => {
+  [...e.target.parentElement.children].forEach(sib => sib.classList.remove("active"))
+  e.target.classList.add("active");
+
   setNumberOfTiles(e.target.innerHTML);
 });
 
